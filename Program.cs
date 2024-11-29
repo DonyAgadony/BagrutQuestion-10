@@ -14,30 +14,30 @@ class PriorQueue(Queue<Patient> q)
 
     public void PriorInsert(Patient p)
     {
-        Queue<Patient> temp = new();
+        Stack<Patient> temp = new();
         while (q.Peek().priority >= p.priority)
         {
-            temp.Enqueue(q.Dequeue());
+            temp.Push(q.Dequeue());
         }
         q.Enqueue(p);
         while (temp.Count > 0)
         {
-            q.Enqueue(temp.Dequeue());
+            q.Enqueue(temp.Pop());
         }
     }
     public void Update(int id, int pri)
     {
         Patient p = new(id, pri);
         PriorInsert(p);
-        Queue<Patient> temp = new();
+        Stack<Patient> temp = new();
         while (q.Peek().id != id)
         {
-            temp.Enqueue(q.Dequeue());
+            temp.Push(q.Dequeue());
         }
         q.Dequeue();
         while (temp.Count > 0)
         {
-            q.Enqueue(temp.Dequeue());
+            q.Enqueue(temp.Pop());
         }
     }
 }
